@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\layout\\list_item.xml",
+        "source": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\src\\main\\res\\layout\\list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\layout\\slide_view_merge.xml",
+        "source": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\src\\main\\res\\layout\\slide_view_merge.xml"
+    },
+    {
+        "merged": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_true.xml",
+        "source": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\src\\main\\res\\layout\\item_true.xml"
+    }
+]
