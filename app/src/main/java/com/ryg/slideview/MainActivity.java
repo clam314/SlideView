@@ -137,6 +137,7 @@ public class MainActivity extends Activity implements OnItemClickListener, OnCli
             holder1.deleteHolder.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    ((SlideView)v.getParent()).shrink();
                     Log.e(TAG, "delete: " + position);
                 }
             });

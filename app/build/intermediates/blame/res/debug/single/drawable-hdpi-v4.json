@@ -1,7 +1,15 @@
 [
     {
-        "merged": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\wechat_icon.png",
-        "source": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\src\\main\\res\\drawable-hdpi\\wechat_icon.png"
+        "merged": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\del_icon_normal.png",
+        "source": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\src\\main\\res\\drawable-hdpi\\del_icon_normal.png"
+    },
+    {
+        "merged": "E:\\ADtest\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\default_qq_avatar.png",
+        "source": "E:\\ADtest\\SlideView\\app\\src\\main\\res\\drawable-hdpi\\default_qq_avatar.png"
+    },
+    {
+        "merged": "E:\\ADtest\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\del_icon_normal.png",
+        "source": "E:\\ADtest\\SlideView\\app\\src\\main\\res\\drawable-hdpi\\del_icon_normal.png"
     },
     {
         "merged": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\default_qq_avatar.png",
@@ -12,7 +20,15 @@
         "source": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\del_icon_normal.png",
-        "source": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\src\\main\\res\\drawable-hdpi\\del_icon_normal.png"
+        "merged": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\wechat_icon.png",
+        "source": "C:\\Users\\clam314\\AndroidStudioProjects\\SlideView\\app\\src\\main\\res\\drawable-hdpi\\wechat_icon.png"
+    },
+    {
+        "merged": "E:\\ADtest\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\wechat_icon.png",
+        "source": "E:\\ADtest\\SlideView\\app\\src\\main\\res\\drawable-hdpi\\wechat_icon.png"
+    },
+    {
+        "merged": "E:\\ADtest\\SlideView\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "E:\\ADtest\\SlideView\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
     }
 ]
