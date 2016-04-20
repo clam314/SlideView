@@ -2,9 +2,7 @@ package com.ryg.slideview;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ListView;
 
 import com.ryg.slideview.MainActivity.MessageItem;
@@ -13,7 +11,8 @@ public class ListViewCompat extends ListView {
 
     private static final String TAG = "ListViewCompat";
 
-    private SlideView mFocusedItemView;
+    private SlideView CurrentOpenItemView;
+    private boolean hasCacheOpenView = false;
 
     public ListViewCompat(Context context) {
         super(context);
@@ -27,41 +26,86 @@ public class ListViewCompat extends ListView {
         super(context, attrs, defStyle);
     }
 
-    public void shrinkListItem(int position) {
-        View item = getChildAt(position);
-
-        if (item != null) {
-            try {
-                ((SlideView) item).shrink();
-            } catch (ClassCastException e) {
-                e.printStackTrace();
-            }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        int x = (int)event.getX();
+        int y = (int)event.getY();
+        if(CurrentOpenItemView != null && CurrentOpenItemView.isOpen){
+            setLongClickable(false);
+        }else if(CurrentOpenItemView == null){
+            setLongClickable(true);
         }
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                int position = pointToPosition(x, y);
+                MessageItem d = (MessageItem)getItemAtPosition(position);
+                if(d!=null && d.slideView.isOpen){
+                    break;
+                }
+                boolean hasOpen = false;
+                for (int i = 0; i < getCount(); i++) {
+                    MessageItem data = (MessageItem) getItemAtPosition(i);
+                    SlideView slideView = null;
+                    if (data != null) {
+                        slideView = data.slideView;
+                    }
+                    if (slideView != null && slideView.isOpen) {
+                        slideView.shrink();
+                        hasOpen = true;
+                    }
+                }
+                if (hasOpen) {
+                    CurrentOpenItemView = null;
+                    return false;
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if(CurrentOpenItemView != null && hasCacheOpenView){
+                    CurrentOpenItemView.onRequireTouchEvent(event);
+                    return false;
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                if(CurrentOpenItemView != null && CurrentOpenItemView.isOpen){
+                    CurrentOpenItemView.onRequireTouchEvent(event);
+                    return false;
+                }
+                if(CurrentOpenItemView !=null) {
+                    CurrentOpenItemView.onRequireTouchEvent(event);
+                    CurrentOpenItemView = null;
+                    hasCacheOpenView = false;
+                }
+                break;
+        }
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
-        case MotionEvent.ACTION_DOWN: {
-            int x = (int) event.getX();
-            int y = (int) event.getY();
-            int position = pointToPosition(x, y);
-            Log.e(TAG, "postion=" + position);
-            if (position != INVALID_POSITION) {
+            case MotionEvent.ACTION_DOWN: {
+                int x = (int) event.getX();
+                int y = (int) event.getY();
+                int position = pointToPosition(x, y);
                 MessageItem data = (MessageItem) getItemAtPosition(position);
-               if(data != null) mFocusedItemView = data.slideView;
-                Log.e(TAG, "FocusedItemView=" + mFocusedItemView);
+                if(data != null){
+                    CurrentOpenItemView = data.slideView;
+                }
             }
-        }
-        default:
-            break;
-        }
-
-        if (mFocusedItemView != null) {
-            mFocusedItemView.onRequireTouchEvent(event);
+            default:
+                break;
         }
 
+        if (CurrentOpenItemView != null) {
+            CurrentOpenItemView.onRequireTouchEvent(event);
+        }
+        if(CurrentOpenItemView != null && CurrentOpenItemView.isOpen){
+            hasCacheOpenView = true;
+            return true;
+        }
         return super.onTouchEvent(event);
     }
 
 }
+
+

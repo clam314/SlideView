@@ -58,10 +58,18 @@ public class MainActivity extends Activity implements OnItemClickListener, OnCli
         mListView.addHeaderView(head);
         mListView.setAdapter(new SlideAdapter());
         mListView.setOnItemClickListener(this);
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e(TAG,"long position: "+position);
+                return true;
+            }
+        });
+
 
     }
 
-    private class SlideAdapter extends BaseAdapter {
+    private class SlideAdapter extends BaseAdapter  implements OnSlideListener{
 
         private LayoutInflater mInflater;
 
@@ -86,7 +94,7 @@ public class MainActivity extends Activity implements OnItemClickListener, OnCli
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, final ViewGroup parent) {
  /*           ViewHolder holder;
             SlideView slideView = (SlideView) convertView;
             if (slideView == null) {
@@ -115,19 +123,30 @@ public class MainActivity extends Activity implements OnItemClickListener, OnCli
             if(convertView == null){
                 convertView = mInflater.inflate(R.layout.item_true,null);
                 holder1 = new Holder();
+                holder1.background = (ImageView)convertView.findViewById(R.id.background);
                 holder1.slideView = (SlideView)convertView.findViewById(R.id.slideview);
                 holder1.deleteHolder =(ViewGroup) holder1.slideView.findViewById(R.id.holder);
+
                 convertView.setTag(holder1);
             }else {
                 holder1 = (Holder)convertView.getTag();
             }
             MessageItem item = mMessageItems.get(position);
             item.slideView = holder1.slideView;
-//            item.slideView.shrink();
-            item.slideView.scrollTo(0,0);
+            item.slideView.shrink();
+            holder1.deleteHolder.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e(TAG, "delete: " + position);
+                }
+            });
             return convertView;
         }
 
+        @Override
+        public void onSlide(View view, int status) {
+
+        }
     }
 
     public class MessageItem {

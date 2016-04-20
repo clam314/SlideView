@@ -15,6 +15,8 @@ public class SlideView extends LinearLayout {
 
     private static final String TAG = "SlideView";
 
+    public boolean isOpen = false;
+
     private Context mContext;
     private LinearLayout mViewContent;
     private RelativeLayout mHolder;
@@ -80,7 +82,8 @@ public class SlideView extends LinearLayout {
     }
 
 
-    public void onRequireTouchEvent(MotionEvent event) {
+    public boolean onRequireTouchEvent(MotionEvent event) {
+        boolean isScroll = false;
         int x = (int) event.getX();
         int y = (int) event.getY();
         int scrollX = getScrollX();
@@ -92,18 +95,18 @@ public class SlideView extends LinearLayout {
                 mScroller.abortAnimation();
             }
             if (mOnSlideListener != null) {
-                mOnSlideListener.onSlide(this,
-                        OnSlideListener.SLIDE_STATUS_START_SCROLL);
+                mOnSlideListener.onSlide(this, OnSlideListener.SLIDE_STATUS_START_SCROLL);
             }
             break;
         }
         case MotionEvent.ACTION_MOVE: {
             int deltaX = x - mLastX;
             int deltaY = y - mLastY;
+
+
             if (Math.abs(deltaX) < Math.abs(deltaY) * TAN) {
                 break;
             }
-
             int newScrollX = scrollX - deltaX;
             if (deltaX != 0) {
                 if (newScrollX < 0) {
@@ -113,7 +116,9 @@ public class SlideView extends LinearLayout {
                 }
                 this.scrollTo(newScrollX, 0);
                 Log.d("scroller", "scrollnewX: " + newScrollX);
-                mViewContent.setAlpha(newScrollX*0.0025f);
+                mViewContent.setAlpha(newScrollX * 0.0025f);
+                isOpen = newScrollX > 0;
+                isScroll = newScrollX > 0 ;
             }
             break;
         }
@@ -123,10 +128,10 @@ public class SlideView extends LinearLayout {
                 newScrollX = mHolderWidth;
             }
             this.smoothScrollTo(newScrollX, 0);
+            isScroll = newScrollX > 0;
+            isOpen = newScrollX > 0;
             if (mOnSlideListener != null) {
-                mOnSlideListener.onSlide(this,
-                        newScrollX == 0 ? OnSlideListener.SLIDE_STATUS_OFF
-                                : OnSlideListener.SLIDE_STATUS_ON);
+                mOnSlideListener.onSlide(this, newScrollX == 0 ? OnSlideListener.SLIDE_STATUS_OFF : OnSlideListener.SLIDE_STATUS_ON);
             }
             break;
         }
@@ -136,6 +141,7 @@ public class SlideView extends LinearLayout {
 
         mLastX = x;
         mLastY = y;
+        return isScroll;
     }
 
     private void smoothScrollTo(int destX, int destY) {
@@ -152,6 +158,7 @@ public class SlideView extends LinearLayout {
             scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
             Log.e("scroller", "curX: " + mScroller.getCurrX());
             mViewContent.setAlpha(mScroller.getCurrX()*0.0025f);
+            isOpen = mScroller.getCurrX()>0;
             postInvalidate();
         }
     }

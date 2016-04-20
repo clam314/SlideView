@@ -8,7 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:clickable="false"
+        android:alpha="0">
     </LinearLayout>
 
     <RelativeLayout
