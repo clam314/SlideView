@@ -16,7 +16,7 @@ public class SlideView extends LinearLayout {
     private static final String TAG = "SlideView";
 
     public boolean isOpen = false;
-
+    public boolean lastScrollTo00 = true;
     private Context mContext;
     private LinearLayout mViewContent;
     private RelativeLayout mHolder;
@@ -128,6 +128,7 @@ public class SlideView extends LinearLayout {
                 newScrollX = mHolderWidth;
             }
             this.smoothScrollTo(newScrollX, 0);
+            lastScrollTo00 = newScrollX == 0;
             isScroll = newScrollX > 0;
             isOpen = newScrollX > 0;
             if (mOnSlideListener != null) {
